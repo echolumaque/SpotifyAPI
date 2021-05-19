@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Spotify.Helpers;
 using Spotify.Models;
 
 namespace Spotify.Controllers
