@@ -23,6 +23,7 @@ namespace Spotify
 
             config.Filters.Add(new CompressAttribute());
             config.Filters.Add(new ForceHTTPSAttribute());
+            //config.Filters.Add(new EncryptAttribute());
         }
     }
 }
