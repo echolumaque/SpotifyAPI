@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Spotify.Helpers;
+using Microsoft.Ajax.Utilities;
 using Spotify.Models;
 
 namespace Spotify.Controllers
@@ -11,19 +11,55 @@ namespace Spotify.Controllers
     [RoutePrefix("albums")]
     public class AlbumsController : ApiController
     {
-        public HttpResponseMessage GetAlbums()
+        public IHttpActionResult GetAllAlbums()
         {
             try
             {
                 using (var albums = new AlbumsEntities())
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, albums.Albums.ToList());
+                    var listOfAlbums = albums.Albums.DistinctBy(x => x.AlbumName).Select(x => new RawAlbumModel
+                    { 
+                        AlbumName = x.AlbumName,
+                        Artist = x.Artist,
+                        Images = x.Images
+                    }).ToList();
+
+                    return Ok(listOfAlbums);
                 }
                 
             }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        public IHttpActionResult GetSongByAlbumName(string albumName)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(albumName.ToString()))
+                {
+                    return BadRequest("Parameter albumName is required1");
+                }
+                else
+                {
+                    using (var albums = new AlbumsEntities())
+                    {
+                        if (albums.Albums.Any(x => x.AlbumName.Equals(albumName)))
+                        {
+                            return Ok(albums.Albums.ToList().Where(x => x.AlbumName.Equals(albumName)));
+                        }
+                        else
+                        {
+                            return Content(HttpStatusCode.NotFound, "Album not found!");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="Home Page"
+             BackgroundColor="Black"
+             x:Class="SpotifyApp.Views.HomePage">
+
+    <ScrollView>
+        <StackLayout>
+            <Grid RowDefinitions="150, 80">
+                <Frame Grid.Row="0"
+                       Padding="5,10,0,0">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,0">
+                            <GradientStop Color="#97530E"
+                                          Offset="0.1"/>
+                            <GradientStop Color="#1E160F"
+                                          Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <StackLayout Margin="0,20">
+                        <Label Text="Recently Played"
+                               FontSize="20"
+                               TextColor="White"
+                               FontFamily="Bold"/>
+                    </StackLayout>
+                </Frame>
+
+                <CollectionView ItemsSource="{Binding Tailored}"
+                                ItemSizingStrategy="MeasureAllItems"
+                                Grid.Row="1"
+                                Margin="0,-85,0,0"
+                                ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="8,0">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GotoAlbumSongsCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+                                <Image Source="{Binding Images}"
+                                       HeightRequest="120"
+                                       WidthRequest="120"/>
+                                <Label Text="{Binding AlbumName}"
+                                       TextColor="White"
+                                       FontSize="12"
+                                       HorizontalOptions="Center"
+                                       FontFamily="Regular"/>
+                                <Label Text="{Binding Artist}"
+                                       TextColor="White"
+                                       FontSize="13"
+                                       HorizontalOptions="Center"
+                                       FontFamily="Regular"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <Label Text="The soundtrack to your life"
+                   TextColor="White"
+                   FontFamily="Bold"
+                   Margin="0,10"
+                   FontSize="20"/>
+
+            <CollectionView ItemsSource="{Binding Life}"
+                            ItemSizingStrategy="MeasureAllItems"
+                            Grid.Row="1"
+                            HeightRequest="180"
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="10,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GotoAlbumSongsCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="{Binding Images}"
+                                   HeightRequest="120"
+                                   WidthRequest="120"/>
+                            <Label Text="{Binding AlbumName}"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   FontFamily="Regular"/>
+                            <Label Text="{Binding Artist}"
+                                   TextColor="White"
+                                   FontSize="13"
+                                   HorizontalOptions="Center"
+                                   FontFamily="Regular"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Soundtrack your home"
+                   TextColor="White"
+                   FontFamily="Bold"
+                   Margin="0,10"
+                   FontSize="20"/>
+
+            <CollectionView ItemsSource="{Binding Home}"
+                            ItemSizingStrategy="MeasureAllItems"
+                            Grid.Row="1"
+                            Margin="0,10"
+                            HeightRequest="180"
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="10,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GotoAlbumSongsCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="{Binding Images}"
+                                   HeightRequest="120"
+                                   WidthRequest="120"/>
+                            <Label Text="{Binding AlbumName}"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   MaxLines="1"
+                                   WidthRequest="80"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="TailTruncation"
+                                   FontFamily="Regular"/>
+                            <Label Text="{Binding Artist}"
+                                   TextColor="White"
+                                   FontSize="13"
+                                   HorizontalOptions="Center"
+                                   FontFamily="Regular"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Mood"
+                   TextColor="White"
+                   FontFamily="Bold"
+                   Margin="0,10"
+                   FontSize="20"/>
+
+            <CollectionView ItemsSource="{Binding Mood}"
+                            ItemSizingStrategy="MeasureAllItems"
+                            Grid.Row="1"
+                            Margin="0,10"
+                            HeightRequest="180"
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="10,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GotoAlbumSongsCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="{Binding Images}"
+                                   HeightRequest="120"
+                                   WidthRequest="120"/>
+                            <Label Text="{Binding AlbumName}"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   HorizontalOptions="CenterAndExpand"
+                                   FontFamily="Regular"/>
+                            <Label Text="{Binding Artist}"
+                                   TextColor="White"
+                                   FontSize="13"
+                                   HorizontalOptions="Center"
+                                   FontFamily="Regular"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

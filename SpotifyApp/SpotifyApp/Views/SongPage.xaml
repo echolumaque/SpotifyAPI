@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:fonts="clr-namespace:SpotifyApp.Helpers.Fonts"
+             x:Class="SpotifyApp.Views.SongPage"
+             Padding="0,30,0,0">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="0,1">
+            <GradientStop Color="#97530E"
+                          Offset="0.1"/>
+            <GradientStop Color="#1E160F"
+                          Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+
+    <StackLayout>
+        <Grid ColumnDefinitions="*,*,*"
+              Margin="20,0">
+            <Label Text="{x:Static fonts:MaterialFilled.Keyboard_arrow_down}"
+                   FontFamily="matf"
+                   TextColor="White"
+                   Grid.Column="0"
+                   FontSize="20"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"/>
+
+            <Label TextColor="White"
+                   Grid.Column="1"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="PLAYING FROM ALBUM"
+                              FontSize="10"
+                              FontFamily="Regular"/>
+                        <Span Text="&#10;"/>
+                        <Span Text="{Binding AlbumName}"
+                              FontFamily="Bold"
+                              FontSize="10"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label Text="{x:Static fonts:Material.More_vert}"
+                   FontFamily="mat"
+                   TextColor="White"
+                   FontSize="20"
+                   Grid.Column="2"
+                   VerticalOptions="Center"
+                   HorizontalOptions="End"/>
+        </Grid>
+
+        <Image Source="{Binding Image}"
+               Margin="0,60,0,0"
+               HeightRequest="365"
+               WidthRequest="365"
+               HorizontalOptions="CenterAndExpand"/>
+
+        <Grid HorizontalOptions="CenterAndExpand"
+              RowDefinitions="*,*,*,*,*"
+              WidthRequest="250"
+              Margin="0,50,0,0"
+              ColumnDefinitions="*,*">
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding SongTitle}"
+                              FontFamily="Bold"
+                              TextColor="White"
+                              FontSize="18"/>
+                        <Span Text="&#10;"/>
+                        <Span Text="{Binding Artist}"
+                              FontFamily="Regular"
+                              TextColor="#AEADAC"
+                              FontSize="12"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label Text="{x:Static fonts:Material.Favorite_border}"
+                   FontFamily="mat"
+                   TextColor="#AEADAC"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"/>
+
+            <Slider HorizontalOptions="FillAndExpand"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    ThumbColor="White"
+                    MinimumTrackColor="White"
+                    Margin="-10,0,-15,0"
+                    Maximum="{Binding Duration}"
+                    Value="{Binding SliderValue}"
+                    DragCompletedCommand="{Binding UpdateCurrentTime}"
+                    MaximumTrackColor="#AEADAC"/>
+
+            <Label Text="{Binding CurrentTime, TargetNullValue=0:00}"
+                   TextColor="#AEADAC"
+                   FontFamily="Regular"
+                   Grid.Row="2"
+                   FontSize="12"
+                   Margin="0,-15,0,0"
+                   Grid.Column="0"/>
+
+            <Label Text="{Binding Duration}"
+                   TextColor="#AEADAC"
+                   FontFamily="Regular"
+                   Grid.Row="2"
+                   FontSize="12"
+                   Margin="0,-15,0,0"
+                   Grid.Column="1"
+                   HorizontalOptions="End"/>
+
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="3"
+                         Grid.Column="0"
+                         HorizontalOptions="Center"
+                         Spacing="30"
+                         Margin="0,-40,0,0"
+                         Grid.ColumnSpan="2">
+                
+                <Label Text="{x:Static fonts:Material.Shuffle}"
+                       TextColor="#AEADAC"
+                       FontSize="20"
+                       VerticalTextAlignment="Center"
+                       FontFamily="mat"/>
+
+                <Label Text="{x:Static fonts:Material.Skip_previous}"
+                       TextColor="White"
+                       FontSize="25"
+                       VerticalTextAlignment="Center"
+                       FontFamily="mat"/>
+
+                <Label Text="{x:Static fonts:Material.Play_circle_filled}"
+                       TextColor="White"
+                       FontSize="50"
+                       VerticalTextAlignment="Center"
+                       FontFamily="mat"/>
+
+                <Label Text="{x:Static fonts:Material.Skip_next}"
+                       TextColor="White"
+                       FontSize="25"
+                       VerticalTextAlignment="Center"
+                       FontFamily="mat"/>
+
+                <Label Text="{x:Static fonts:Material.Repeat}"
+                       TextColor="#AEADAC"
+                       FontSize="20"
+                       VerticalTextAlignment="Center"
+                       FontFamily="mat"/>
+            </StackLayout>
+
+            <Label Text="{x:Static fonts:Material.Devices}"
+                   FontFamily="mat"
+                   TextColor="#AEADAC"
+                   Grid.Row="4"
+                   Grid.Column="0"
+                   FontSize="20"
+                   Margin="0,-20,0,0"
+                   VerticalOptions="Center"/>
+
+            <Label Text="{x:Static fonts:Material.Playlist_play}"
+                   FontFamily="mat"
+                   TextColor="#AEADAC"
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   HorizontalOptions="End"
+                   FontSize="20"
+                   Margin="0,-20,-5,0"
+                   VerticalOptions="Center"/>
+
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
