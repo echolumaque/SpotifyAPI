@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Helpers\Fonts\MaterialIcons-Regular.ttf" />
+    <None Remove="Helpers\Fonts\MaterialIconsOutlined-Regular.otf" />
+    <None Remove="Helpers\Fonts\Roboto-Bold.ttf" />
+    <None Remove="Helpers\Fonts\Roboto-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers\Fonts\MaterialIcons-Regular.ttf" />
+    <EmbeddedResource Include="Helpers\Fonts\MaterialIconsOutlined-Regular.otf" />
+    <EmbeddedResource Include="Helpers\Fonts\Roboto-Bold.ttf" />
+    <EmbeddedResource Include="Helpers\Fonts\Roboto-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Refit" Version="6.0.38" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.1" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="8.0.0.1909" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\AlbumSongsPage.xaml.cs">
+      <DependentUpon>AlbumSongsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SongPage.xaml.cs">
+      <DependentUpon>SongPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainTabbedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AlbumSongsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SongPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
