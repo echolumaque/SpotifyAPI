@@ -66,7 +66,7 @@
                    Margin="0,10"
                    FontSize="20"/>
 
-            <CollectionView ItemsSource="{Binding Life}"
+            <!--<CollectionView ItemsSource="{Binding Life}"
                             ItemSizingStrategy="MeasureAllItems"
                             Grid.Row="1"
                             HeightRequest="180"
@@ -94,7 +94,7 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
 
             <Label Text="Soundtrack your home"
                    TextColor="White"
