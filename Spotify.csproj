@@ -15,6 +15,7 @@
     <RootNamespace>Spotify</RootNamespace>
     <AssemblyName>Spotify</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <LangVersion>9.0</LangVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -205,6 +206,9 @@
       <DependentUpon>AlbumsEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\QueryUsersLikes_Result.cs">
+      <DependentUpon>UsersLikesEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QueryUsersLikes_Result1.cs">
       <DependentUpon>UsersLikesEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RawAlbumModel.cs" />
