@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Http;
 using System.Web.Http;
 using Spotify.Models;
 
 namespace Spotify.Controllers
 {
-    [RoutePrefix("users/likes")]
+    [RoutePrefix("userslikes")]
     public class UsersLikesController : ApiController
     {
         [HttpGet]
-        [Route("{userId:int}")]
-        public HttpResponseMessage GetLikes([FromUri] int userId)
+        public IHttpActionResult GetLikes(int userId)
         {
             try
             {
                 using (var likes = new UsersLikesEntities())
                 {
-                    return likes.QueryUsersLikes(userId).ToList().Count == 0 ? 
-                        Request.CreateResponse(System.Net.HttpStatusCode.NotFound, new NullReferenceException("The requested data is empty")) :
-                        Request.CreateResponse(System.Net.HttpStatusCode.OK, likes.QueryUsersLikes(userId).ToList()); 
+                    using (var users = new UsersEntities())
+                    {
+                        return users.Users.Any(x => x.UserID == userId) ? Ok(likes.QueryUsersLikes(userId).ToList())
+                        : Content(System.Net.HttpStatusCode.NotFound, "");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ex);
+                return BadRequest(ex.Message);
             }
         }
     }
