@@ -33,11 +33,18 @@
                            HorizontalTextAlignment="Center"
                            FontSize="18"/>
 
-                    <Label Text="{Binding Artist, StringFormat='Album by {0}'}"
-                           FontFamily="Regular"
+                    <Label FontFamily="Regular"
                            TextColor="DarkGray"
                            FontSize="12"
-                           HorizontalTextAlignment="Center"/>
+                           HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Artist, StringFormat='Album by {0}'}"/>
+                                <Span Text=" • "/>
+                                <Span Text="{Binding Year}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
                     <Button BackgroundColor="#1ED760"
                             Text="Shuffle play"
@@ -46,8 +53,8 @@
                             FontFamily="Bold"
                             Margin="0,20,0,0"
                             CornerRadius="50"
-                            HeightRequest="40"
-                            Padding="10"/>
+                            HorizontalOptions="Center"
+                            Padding="30,15"/>
                 </StackLayout>
             </Frame>
 
@@ -93,7 +100,12 @@
                                    FontSize="20"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
-                                   TextColor="DarkGray"/>
+                                   TextColor="DarkGray">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GotoSongInfoCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

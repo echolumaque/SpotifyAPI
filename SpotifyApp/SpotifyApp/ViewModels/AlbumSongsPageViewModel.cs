@@ -25,15 +25,24 @@ namespace SpotifyApp.ViewModels
             Image = submitedParameter.Images;
             AlbumName = submitedParameter.AlbumName;
             Artist = submitedParameter.Artist;
+            Year = submitedParameter.Year;
             Songs = new ObservableCollection<AlbumsModel>(await QueryData().GetAlbumSongs(submitedParameter.AlbumName));
 
             Parallel.For(0, Songs.Count, i =>
             {
                 Songs[i].GotoSongCommand = new DelegateCommand<AlbumsModel>(async (song) => await GotoSongPage(song));
+                Songs[i].GotoSongInfoCommand = new DelegateCommand<AlbumsModel>(async (songInfo) => await GotoAlbumSongInfoPage(songInfo));
             });
         }
 
         #region Properties
+
+        private string year;
+        public string Year
+        {
+            get { return year; }
+            set { SetProperty(ref year, value); }
+        }
 
         private string image;
         public string Image
@@ -82,6 +91,24 @@ namespace SpotifyApp.ViewModels
                 }
             };
             await navigationService.NavigateAsync("SongPage", parameters);
+        }
+
+        private async Task GotoAlbumSongInfoPage(AlbumsModel albumsModel)
+        {
+            var parameters = new NavigationParameters
+            {
+                {
+                    "songInfo",
+                    new AlbumsModel
+                    {
+                        Images =  albumsModel.Images,
+                        Title = albumsModel.Title,
+                        Artist = albumsModel.Artist
+                    }
+                }
+            };
+
+            await navigationService.NavigateAsync("AlbumSongInfoPage", parameters);
         }
         #endregion
     }

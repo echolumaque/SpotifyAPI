@@ -23,6 +23,7 @@ namespace SpotifyApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Android.Glide.Forms.Init(this);
+            global::Rg.Plugins.Popup.Popup.Init(this);
 
             if (Build.VERSION.SdkInt <= BuildVersionCodes.Q)
             {
@@ -84,6 +85,8 @@ namespace SpotifyApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        public override void OnBackPressed() => Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
     }
 
     public class AndroidInitializer : IPlatformInitializer

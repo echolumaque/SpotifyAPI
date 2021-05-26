@@ -33,7 +33,7 @@
         </EntityType>
         <EntityContainer Name="UsersLikesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UsersLikeSongs" EntityType="Self.UsersLikeSong" />
-          <FunctionImport Name="QueryUsersLikes" ReturnType="Collection(UsersLikesModel.QueryUsersLikes_Result1)">
+          <FunctionImport Name="QueryUsersLikes" ReturnType="Collection(UsersLikesModel.QueryUsersLikes_Result)">
             <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -41,13 +41,8 @@
           <Property Type="String" Name="Images" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" />
           <Property Type="String" Name="Artist" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="QueryUsersLikes_Result1">
-          <Property Type="String" Name="Images" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" />
-          <Property Type="String" Name="Artist" Nullable="false" />
           <Property Type="String" Name="AlbumName" Nullable="false" />
+          <Property Type="Int32" Name="Duration" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -66,11 +61,12 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="QueryUsersLikes" FunctionName="UsersLikesModel.Store.QueryUsersLikes">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="UsersLikesModel.QueryUsersLikes_Result1">
+              <ComplexTypeMapping TypeName="UsersLikesModel.QueryUsersLikes_Result">
                 <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Artist" ColumnName="Artist" />
                 <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

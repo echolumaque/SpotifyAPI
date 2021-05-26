@@ -1,5 +1,6 @@
 using Prism;
 using Prism.Ioc;
+using Prism.Plugin.Popups;
 using SpotifyApp.ViewModels;
 using SpotifyApp.Views;
 using Xamarin.Essentials.Implementation;
@@ -36,6 +37,8 @@ namespace SpotifyApp
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
             containerRegistry.RegisterForNavigation<AlbumSongsPage, AlbumSongsPageViewModel>();
             containerRegistry.RegisterForNavigation<SongPage, SongPageViewModel>();
+            containerRegistry.RegisterForNavigation<AlbumSongInfoPopupPage, AlbumSongInfoViewModel>();
+            containerRegistry.RegisterPopupNavigationService();
         }
     }
 }

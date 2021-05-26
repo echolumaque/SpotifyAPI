@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:prism="http://prismlibrary.com"
+                 prism:ViewModelLocator.AutowireViewModel="True"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+                 HasSystemPadding="True"
+                 HasKeyboardOffset="True"
+                 xmlns:fonts="clr-namespace:SpotifyApp.Helpers.Fonts"
+                 x:Class="SpotifyApp.Views.AlbumSongInfoPopupPage">
+    <ScrollView>
+        <StackLayout BackgroundColor="Black"
+                        VerticalOptions="End"
+                        HorizontalOptions="FillAndExpand">
+            <Image Source="{Binding Image}"
+                    HorizontalOptions="CenterAndExpand"
+                    WidthRequest="150"
+                    HeightRequest="150"/>
+
+            <Label Text="{Binding SongTitle}"
+                    HorizontalOptions="CenterAndExpand"
+                    FontFamily="Bold"
+                    TextColor="White"
+                    FontSize="20"/>
+
+            <Label Text="{Binding Artist}"
+                   HorizontalOptions="CenterAndExpand"
+                   FontFamily="Regular"
+                   TextColor="#7E7E7E"
+                   FontSize="15"/>
+
+            <StackLayout Margin="{Binding MenuContainerMargin}"
+                         Spacing="20">
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Favorite_border}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="Like"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Do_disturb_on}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="Hide this Song"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Playlist_add}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="Add to Playlist"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Queue_music}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="Add to Queue"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Person}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="View Artists"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Share}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="Share"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Settings_input_antenna}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="Go to Song Radio"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="Start"
+                       >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.People}"
+                                  FontFamily="mat"
+                                  TextColor="#7E7E7E"/>
+                            <Span Text="     "/>
+                            <Span Text="Show Credits"
+                                  TextColor="White"
+                                  FontFamily="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</popup:PopupPage>

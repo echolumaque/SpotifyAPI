@@ -53,7 +53,7 @@ namespace SpotifyApp.ViewModels
             ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
         })
         {
-            BaseAddress = new Uri("https://10.0.2.2:44384/")
+            BaseAddress = new Uri("https://10.0.2.2:443/")
         };
 
         public static ISpotifyAPI QueryData() => RestService.For<ISpotifyAPI>(Endpoint);

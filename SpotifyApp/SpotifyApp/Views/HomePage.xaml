@@ -36,24 +36,27 @@
                                 ItemsLayout="HorizontalList">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Margin="8,0">
+                            <StackLayout Margin="10,0">
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding GotoAlbumSongsCommand}"
                                                           CommandParameter="{Binding .}"/>
                                 </StackLayout.GestureRecognizers>
                                 <Image Source="{Binding Images}"
-                                       HeightRequest="120"
-                                       WidthRequest="120"/>
+                                   HeightRequest="120"
+                                   WidthRequest="120"/>
                                 <Label Text="{Binding AlbumName}"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       HorizontalOptions="Center"
-                                       FontFamily="Regular"/>
+                                   TextColor="White"
+                                   FontSize="12"
+                                   MaxLines="1"
+                                   WidthRequest="80"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="TailTruncation"
+                                   FontFamily="Regular"/>
                                 <Label Text="{Binding Artist}"
-                                       TextColor="White"
-                                       FontSize="13"
-                                       HorizontalOptions="Center"
-                                       FontFamily="Regular"/>
+                                   TextColor="White"
+                                   FontSize="13"
+                                   HorizontalOptions="Center"
+                                   FontFamily="Regular"/>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -66,9 +69,8 @@
                    Margin="0,10"
                    FontSize="20"/>
 
-            <!--<CollectionView ItemsSource="{Binding Life}"
+            <CollectionView ItemsSource="{Binding Life}"
                             ItemSizingStrategy="MeasureAllItems"
-                            Grid.Row="1"
                             HeightRequest="180"
                             ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
@@ -84,7 +86,10 @@
                             <Label Text="{Binding AlbumName}"
                                    TextColor="White"
                                    FontSize="12"
-                                   HorizontalOptions="Center"
+                                   MaxLines="1"
+                                   WidthRequest="80"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="TailTruncation"
                                    FontFamily="Regular"/>
                             <Label Text="{Binding Artist}"
                                    TextColor="White"
@@ -94,7 +99,7 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>-->
+            </CollectionView>
 
             <Label Text="Soundtrack your home"
                    TextColor="White"
@@ -104,7 +109,6 @@
 
             <CollectionView ItemsSource="{Binding Home}"
                             ItemSizingStrategy="MeasureAllItems"
-                            Grid.Row="1"
                             Margin="0,10"
                             HeightRequest="180"
                             ItemsLayout="HorizontalList">
@@ -144,7 +148,6 @@
 
             <CollectionView ItemsSource="{Binding Mood}"
                             ItemSizingStrategy="MeasureAllItems"
-                            Grid.Row="1"
                             Margin="0,10"
                             HeightRequest="180"
                             ItemsLayout="HorizontalList">
@@ -161,7 +164,10 @@
                             <Label Text="{Binding AlbumName}"
                                    TextColor="White"
                                    FontSize="12"
-                                   HorizontalOptions="CenterAndExpand"
+                                   MaxLines="1"
+                                   WidthRequest="80"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="TailTruncation"
                                    FontFamily="Regular"/>
                             <Label Text="{Binding Artist}"
                                    TextColor="White"

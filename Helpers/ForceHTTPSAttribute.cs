@@ -16,7 +16,7 @@ namespace Spotify.Helpers
                 var uriBuilder = new UriBuilder(actionContext.Request.RequestUri)
                 {
                     Scheme = Uri.UriSchemeHttps,
-                    Port = 44384
+                    Port = 443
                 };
 
                 actionContext.Response.Headers.Location = uriBuilder.Uri;
