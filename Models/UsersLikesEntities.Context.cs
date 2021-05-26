@@ -29,13 +29,13 @@ namespace Spotify.Models
     
         public virtual DbSet<UsersLikeSong> UsersLikeSongs { get; set; }
     
-        public virtual ObjectResult<QueryUsersLikes_Result1> QueryUsersLikes(Nullable<int> userID)
+        public virtual ObjectResult<QueryUsersLikes_Result> QueryUsersLikes(Nullable<int> userID)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
                 new ObjectParameter("UserID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<QueryUsersLikes_Result1>("QueryUsersLikes", userIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<QueryUsersLikes_Result>("QueryUsersLikes", userIDParameter);
         }
     }
 }

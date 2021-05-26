@@ -26,8 +26,12 @@ namespace SpotifyApp.Models
 
         [JsonProperty("AlbumName")]
         public string AlbumName { get; set; }
+        [JsonProperty("Year")]
+        public string Year { get; set; }
 
         public DelegateCommand<AlbumsModel> GotoAlbumSongsCommand { get; set; }
         public DelegateCommand<AlbumsModel> GotoSongCommand { get; set; }
+        public DelegateCommand<AlbumsModel> GotoSongInfoCommand { get; set; }
+
     }
 }

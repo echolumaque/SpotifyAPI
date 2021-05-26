@@ -21,5 +21,6 @@ namespace Spotify.Models
         public int Duration { get; set; }
         public bool IsExplicit { get; set; }
         public string AlbumName { get; set; }
+        public string Year { get; set; }
     }
 }

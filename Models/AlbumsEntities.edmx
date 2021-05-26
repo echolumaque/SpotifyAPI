@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AlbumsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AlbumsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Albums">
           <Key>
             <PropertyRef Name="SongID" />
@@ -16,12 +16,12 @@
           <Property Name="Duration" Type="int" Nullable="false" />
           <Property Name="IsExplicit" Type="bit" Nullable="false" />
           <Property Name="AlbumName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityContainer Name="AlbumsModelStoreContainer">
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AlbumsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -36,6 +36,7 @@
           <Property Name="Duration" Type="Int32" Nullable="false" />
           <Property Name="IsExplicit" Type="Boolean" Nullable="false" />
           <Property Name="AlbumName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="AlbumsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Albums" EntityType="Self.Album" />
@@ -49,6 +50,7 @@
           <EntitySetMapping Name="Albums">
             <EntityTypeMapping TypeName="AlbumsModel.Album">
               <MappingFragment StoreEntitySet="Albums">
+                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="SongID" ColumnName="SongID" />
                 <ScalarProperty Name="Artist" ColumnName="Artist" />
                 <ScalarProperty Name="Images" ColumnName="Images" />

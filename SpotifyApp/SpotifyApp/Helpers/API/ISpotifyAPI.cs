@@ -14,5 +14,6 @@ namespace SpotifyApp.Helpers.API
 
         [Get("/albums?albumName={albumName}")]
         Task<IEnumerable<AlbumsModel>> GetAlbumSongs(string albumName);
+
     }
 }

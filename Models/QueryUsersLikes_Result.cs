@@ -16,6 +16,7 @@ namespace Spotify.Models
         public string Images { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
-        public int UserID { get; set; }
+        public string AlbumName { get; set; }
+        public int Duration { get; set; }
     }
 }

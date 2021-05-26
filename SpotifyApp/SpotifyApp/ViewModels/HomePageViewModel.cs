@@ -79,7 +79,8 @@ namespace SpotifyApp.ViewModels
                     { 
                         Images = albumsModel.Images,
                         AlbumName = albumsModel.AlbumName,
-                        Artist = albumsModel.Artist
+                        Artist = albumsModel.Artist,
+                        Year = albumsModel.Year
                     }
                 }
             };

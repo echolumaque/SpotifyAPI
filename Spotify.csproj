@@ -208,10 +208,6 @@
     <Compile Include="Models\QueryUsersLikes_Result.cs">
       <DependentUpon>UsersLikesEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QueryUsersLikes_Result1.cs">
-      <DependentUpon>UsersLikesEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RawAlbumModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>UsersEntities.tt</DependentUpon>
     </Compile>

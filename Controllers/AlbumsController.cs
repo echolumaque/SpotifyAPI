@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Ajax.Utilities;
 using Spotify.Models;
@@ -17,11 +16,12 @@ namespace Spotify.Controllers
             {
                 using (var albums = new AlbumsEntities())
                 {
-                    var listOfAlbums = albums.Albums.DistinctBy(x => x.AlbumName).Select(x => new RawAlbumModel
-                    { 
-                        AlbumName = x.AlbumName,
-                        Artist = x.Artist,
-                        Images = x.Images
+                    var listOfAlbums = albums.Albums.DistinctBy(x => x.AlbumName).Select(x => new 
+                    {
+                        x.AlbumName,
+                        x.Artist,
+                        x.Images,
+                        x.Year
                     }).ToList();
 
                     return Ok(listOfAlbums);
