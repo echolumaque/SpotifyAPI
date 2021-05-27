@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Refit;
 using SpotifyApp.Models;
@@ -15,5 +13,10 @@ namespace SpotifyApp.Helpers.API
         [Get("/albums?albumName={albumName}")]
         Task<IEnumerable<AlbumsModel>> GetAlbumSongs(string albumName);
 
+        [Post("/userslikes/addlike")]
+        Task LikeASong([Body] UserLikeSongsModel userLikeSongsModel);
+
+        [Get("/userslikes?userId={userId}")]
+        Task<IEnumerable<AlbumsModel>> GetUserLikedSongs(int userId);
     }
 }

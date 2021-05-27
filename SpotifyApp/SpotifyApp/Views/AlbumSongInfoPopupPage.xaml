@@ -34,15 +34,18 @@
                 <Label HorizontalOptions="Start">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{x:Static fonts:Material.Favorite_border}"
-                                  FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                            <Span Text="{Binding LikeText}"
+                                  FontFamily="{Binding LikeFontFamily}"
+                                  TextColor="{Binding LikeColor}"/>
                             <Span Text="     "/>
-                            <Span Text="Like"
+                            <Span Text="{Binding LikedOrNot}"
                                   TextColor="White"
                                   FontFamily="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LikeASongCommand}"/>
+                    </Label.GestureRecognizers>
                 </Label>
 
                 <Label HorizontalOptions="Start">

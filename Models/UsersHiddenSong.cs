@@ -10,14 +10,12 @@
 namespace Spotify.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class QueryUsersLikes_Result
+    public partial class UsersHiddenSong
     {
+        public int HiddenID { get; set; }
+        public int UserID { get; set; }
         public int SongID { get; set; }
-        public string Images { get; set; }
-        public string Title { get; set; }
-        public string Artist { get; set; }
-        public string AlbumName { get; set; }
-        public int Duration { get; set; }
     }
 }

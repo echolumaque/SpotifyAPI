@@ -103,12 +103,13 @@ namespace SpotifyApp.ViewModels
                     {
                         Images =  albumsModel.Images,
                         Title = albumsModel.Title,
-                        Artist = albumsModel.Artist
+                        Artist = albumsModel.Artist,
+                        SongId = albumsModel.SongId
                     }
                 }
             };
 
-            await navigationService.NavigateAsync("AlbumSongInfoPage", parameters);
+            await navigationService.NavigateAsync("AlbumSongInfoPopupPage", parameters);
         }
         #endregion
     }

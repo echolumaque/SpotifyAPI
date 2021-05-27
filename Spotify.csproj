@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UsersHiddenSongsController.cs" />
     <Compile Include="Controllers\UsersLikesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -225,6 +226,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UsersEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersHiddenSong.cs">
+      <DependentUpon>UsersHiddenSongsEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersHiddenSongsEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersHiddenSongsEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersHiddenSongsEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersHiddenSongsEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersHiddenSongsEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersHiddenSongsEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersLikesEntities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -274,6 +293,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UsersEntities.edmx</DependentUpon>
       <LastGenOutput>UsersEntities.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UsersHiddenSongsEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsersHiddenSongsEntities.edmx</DependentUpon>
+      <LastGenOutput>UsersHiddenSongsEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UsersHiddenSongsEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsersHiddenSongsEntities.edmx</DependentUpon>
+      <LastGenOutput>UsersHiddenSongsEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Models\UsersLikesEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -326,6 +355,13 @@
     </EntityDeploy>
     <Content Include="Models\UsersEntities.edmx.diagram">
       <DependentUpon>UsersEntities.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\UsersHiddenSongsEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UsersHiddenSongsEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UsersHiddenSongsEntities.edmx.diagram">
+      <DependentUpon>UsersHiddenSongsEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
