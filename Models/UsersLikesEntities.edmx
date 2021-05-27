@@ -38,6 +38,7 @@
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="QueryUsersLikes_Result">
+          <Property Type="Int32" Name="SongID" Nullable="false" />
           <Property Type="String" Name="Images" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" />
           <Property Type="String" Name="Artist" Nullable="false" />
@@ -62,6 +63,7 @@
           <FunctionImportMapping FunctionImportName="QueryUsersLikes" FunctionName="UsersLikesModel.Store.QueryUsersLikes">
             <ResultMapping>
               <ComplexTypeMapping TypeName="UsersLikesModel.QueryUsersLikes_Result">
+                <ScalarProperty Name="SongID" ColumnName="SongID" />
                 <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Artist" ColumnName="Artist" />

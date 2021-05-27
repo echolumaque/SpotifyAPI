@@ -40,7 +40,7 @@ namespace Spotify.Controllers
                     likes.UsersLikeSongs.Add(usersLikeSong);
 
                     await likes.SaveChangesAsync();
-                    return Created(Request.RequestUri + usersLikeSong.LikeID.ToString(), likes);
+                    return Ok(new { Message = $"Succesfully liked song {usersLikeSong.UserID} by user {usersLikeSong.UserID}" });
                 }
             }
             catch (Exception ex)
