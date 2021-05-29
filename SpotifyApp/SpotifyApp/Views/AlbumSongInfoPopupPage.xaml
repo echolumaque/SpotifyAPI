@@ -7,11 +7,12 @@
                  HasSystemPadding="True"
                  HasKeyboardOffset="True"
                  xmlns:fonts="clr-namespace:SpotifyApp.Helpers.Fonts"
+                 prism:DialogLayout.CloseOnBackgroundTapped="True"
                  x:Class="SpotifyApp.Views.AlbumSongInfoPopupPage">
-    <ScrollView>
-        <StackLayout BackgroundColor="Black"
-                        VerticalOptions="End"
-                        HorizontalOptions="FillAndExpand">
+    
+    <ScrollView VerticalOptions="End"
+                HorizontalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="Black">
             <Image Source="{Binding Image}"
                     HorizontalOptions="CenterAndExpand"
                     WidthRequest="150"
@@ -53,9 +54,9 @@
                         <FormattedString>
                             <Span Text="{x:Static fonts:Material.Do_disturb_on}"
                                   FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                                  TextColor="{Binding HiddenColor}"/>
                             <Span Text="     "/>
-                            <Span Text="Hide this Song"
+                            <Span Text="{Binding HiddenText}"
                                   TextColor="White"
                                   FontFamily="Bold"/>
                         </FormattedString>
