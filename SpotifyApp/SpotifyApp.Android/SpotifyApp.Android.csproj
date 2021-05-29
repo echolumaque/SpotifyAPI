@@ -64,6 +64,9 @@
     <PackageReference Include="glidex.forms">
       <Version>2.1.0.470</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Plugin.Popups">
       <Version>8.0.76</Version>
     </PackageReference>
@@ -75,6 +78,7 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Dependencies\ToastDroid.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="SplashActivity.cs" />

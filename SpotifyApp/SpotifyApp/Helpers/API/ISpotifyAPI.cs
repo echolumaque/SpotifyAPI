@@ -13,13 +13,16 @@ namespace SpotifyApp.Helpers.API
         [Get("/albums?albumName={albumName}")]
         Task<IEnumerable<AlbumsModel>> GetAlbumSongs(string albumName);
 
-        [Post("/userslikes/addlike")]
-        Task LikeASong([Body] UserLikeSongsModel userLikeSongsModel);
-
         [Get("/userslikes?userId={userId}")]
         Task<IEnumerable<AlbumsModel>> GetUserLikedSongs(int userId);
 
+        [Post("/userslikes/addlike")]
+        Task LikeASong([Body] UserLikeSongsModel userLikeSongsModel);
+
         [Get("/usershiddensongs?userId={userId}")]
         Task<IEnumerable<int>> GetUsersHiddenSongs(int userId);
+
+        [Post("/usershiddensongs/hide")]
+        Task HideASong([Body] UserLikeSongsModel userHideModel);
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SpotifyApp.Helpers.API
+namespace SpotifyApp.Helpers
 {
     public class ModifiedObservableCollection<T> : ObservableCollection<T>
     {

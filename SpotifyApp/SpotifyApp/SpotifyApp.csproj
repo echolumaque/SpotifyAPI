@@ -28,9 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\AlbumSongInfoPage.xaml.cs">
-      <DependentUpon>AlbumSongInfoPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\AlbumSongsPage.xaml.cs">
       <DependentUpon>AlbumSongsPage.xaml</DependentUpon>
     </Compile>
@@ -50,6 +47,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AlbumSongsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NewPlaylistPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SongPage.xaml">
