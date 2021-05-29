@@ -185,6 +185,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Argon2iEncryption.cs" />
+    <Compile Include="Helpers\BaseApiController.cs" />
     <Compile Include="Helpers\CompressAttribute.cs" />
     <Compile Include="Helpers\EncryptAttribute.cs" />
     <Compile Include="Helpers\ForceHTTPSAttribute.cs" />

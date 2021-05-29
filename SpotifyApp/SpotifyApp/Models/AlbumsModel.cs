@@ -32,6 +32,7 @@ namespace SpotifyApp.Models
         public DelegateCommand<AlbumsModel> GotoAlbumSongsCommand { get; set; }
         public DelegateCommand<AlbumsModel> GotoSongCommand { get; set; }
         public DelegateCommand<AlbumsModel> GotoSongInfoCommand { get; set; }
+        public double SongOpacity { get; set; }//opacity if song is hidden or not
 
     }
 }

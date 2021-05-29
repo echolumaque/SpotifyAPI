@@ -12,6 +12,8 @@ namespace Spotify.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class UsersHiddenSongsEntities : DbContext
     {
@@ -26,5 +28,14 @@ namespace Spotify.Models
         }
     
         public virtual DbSet<UsersHiddenSong> UsersHiddenSongs { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> QueryUsersHiddenSongs(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("QueryUsersHiddenSongs", userIDParameter);
+        }
     }
 }

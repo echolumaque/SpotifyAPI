@@ -18,5 +18,8 @@ namespace SpotifyApp.Helpers.API
 
         [Get("/userslikes?userId={userId}")]
         Task<IEnumerable<AlbumsModel>> GetUserLikedSongs(int userId);
+
+        [Get("/usershiddensongs?userId={userId}")]
+        Task<IEnumerable<int>> GetUsersHiddenSongs(int userId);
     }
 }

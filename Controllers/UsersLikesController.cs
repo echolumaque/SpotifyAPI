@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Spotify.Helpers;
 using Spotify.Models;
 
 namespace Spotify.Controllers
 {
     [RoutePrefix("userslikes")]
-    public class UsersLikesController : ApiController
+    public class UsersLikesController : BaseApiController
     {
         [HttpGet]
         public IHttpActionResult GetLikes(int userId)
@@ -18,7 +19,7 @@ namespace Spotify.Controllers
                 {
                     using (var users = new UsersEntities())
                     {
-                        return users.Users.Any(x => x.UserID == userId) ? Ok(likes.QueryUsersLikes(userId).ToList())
+                        return UserExist(userId) ? Ok(likes.QueryUsersLikes(userId).ToList())
                         : Content(System.Net.HttpStatusCode.NotFound, new { Message = $"User with user id: {userId} is not found on the database" });
                     }
                 }
@@ -35,12 +36,19 @@ namespace Spotify.Controllers
         {
             try
             {
-                using (var likes = new UsersLikesEntities())
+                if (UserExist(usersLikeSong.UserID))
                 {
-                    likes.UsersLikeSongs.Add(usersLikeSong);
+                    using (var likes = new UsersLikesEntities())
+                    {
+                        likes.UsersLikeSongs.Add(usersLikeSong);
 
-                    await likes.SaveChangesAsync();
-                    return Ok(new { Message = $"Succesfully liked song {usersLikeSong.UserID} by user {usersLikeSong.UserID}" });
+                        await likes.SaveChangesAsync();
+                        return Ok(new { Message = $"Succesfully liked song {usersLikeSong.UserID} by user {usersLikeSong.UserID}" });
+                    }
+                }
+                else
+                {
+                    return Content(System.Net.HttpStatusCode.NotFound, new { Message = $"User with user id: {usersLikeSong.UserID} is not found on the database" });
                 }
             }
             catch (Exception ex)

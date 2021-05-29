@@ -31,11 +31,26 @@ namespace SpotifyApp.ViewModels
             MenuContainerMargin = new Thickness(Prism.PrismApplicationBase.Current.MainPage.Width * 0.2, 0, 0, 0);
 
             await CheckIfUserLikedTheSong();
+            await CheckIfUserHideTheSong();
         }
 
 
 
         #region Properties
+
+        private string hiddenText;
+        public string HiddenText
+        {
+            get { return hiddenText; }
+            set { SetProperty(ref hiddenText, value); }
+        }
+
+        private Color hiddenColor;
+        public Color HiddenColor
+        {
+            get { return hiddenColor; }
+            set { SetProperty(ref hiddenColor, value); }
+        }
 
         private string likedOrNot;
         public string LikedOrNot
@@ -127,6 +142,22 @@ namespace SpotifyApp.ViewModels
                 LikeFontFamily = "matf";
                 LikeColor = Color.FromHex("#7E7E7E");
                 LikedOrNot = "Like";
+            }
+        }
+
+        private async Task CheckIfUserHideTheSong()
+        {
+            var listOfUserHiddenSongs = await QueryData().GetUsersHiddenSongs(1);
+
+            if (listOfUserHiddenSongs.Any(x => x == songId))
+            {
+                HiddenText = "Hidden";
+                HiddenColor = Color.FromHex("#C61929");
+            }
+            else
+            {
+                HiddenText = "Hide this Song";
+                HiddenColor = Color.FromHex("#7E7E7E");
             }
         }
         #endregion

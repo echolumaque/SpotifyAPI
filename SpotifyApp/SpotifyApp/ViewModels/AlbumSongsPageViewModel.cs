@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using SpotifyApp.Helpers.API;
 using SpotifyApp.Models;
+using Xamarin.Forms;
 
 namespace SpotifyApp.ViewModels
 {
@@ -21,21 +23,37 @@ namespace SpotifyApp.ViewModels
         public override async void Initialize(INavigationParameters parameters)
         {
             var submitedParameter = parameters.GetValue<AlbumsModel>("album");
+            var albumSongs = await QueryData().GetAlbumSongs(submitedParameter.AlbumName);
 
             Image = submitedParameter.Images;
             AlbumName = submitedParameter.AlbumName;
             Artist = submitedParameter.Artist;
             Year = submitedParameter.Year;
-            Songs = new ObservableCollection<AlbumsModel>(await QueryData().GetAlbumSongs(submitedParameter.AlbumName));
+
+            var listOfUsersHiddenSongs = await QueryData().GetUsersHiddenSongs(3);
+
+            Songs = new ModifiedObservableCollection<AlbumsModel>();
+
+            notHiddenSongs = albumSongs.Where(x => !listOfUsersHiddenSongs.Contains(x.SongId));
+            Parallel.For(0, albumSongs.Where(x => !listOfUsersHiddenSongs.Contains(x.SongId)).Count(), i => notHiddenSongs.ElementAt(i).SongOpacity = 1.0);
+            Songs.AddRange(notHiddenSongs);
+
+            hiddenSongs = albumSongs.Where(x => listOfUsersHiddenSongs.Contains(x.SongId));
+            Parallel.For(0, albumSongs.Where(x => listOfUsersHiddenSongs.Contains(x.SongId)).Count(), i => hiddenSongs.ElementAt(i).SongOpacity = 0.5);
+            Songs.AddRange(hiddenSongs);
 
             Parallel.For(0, Songs.Count, i =>
             {
                 Songs[i].GotoSongCommand = new DelegateCommand<AlbumsModel>(async (song) => await GotoSongPage(song));
                 Songs[i].GotoSongInfoCommand = new DelegateCommand<AlbumsModel>(async (songInfo) => await GotoAlbumSongInfoPage(songInfo));
             });
+
         }
 
         #region Properties
+
+        private IEnumerable<AlbumsModel> notHiddenSongs;
+        private IEnumerable<AlbumsModel> hiddenSongs;
 
         private string year;
         public string Year
@@ -65,8 +83,8 @@ namespace SpotifyApp.ViewModels
             set { SetProperty(ref artist, value); }
         }
 
-        private ObservableCollection<AlbumsModel> songs;
-        public ObservableCollection<AlbumsModel> Songs
+        private ModifiedObservableCollection<AlbumsModel> songs;
+        public ModifiedObservableCollection<AlbumsModel> Songs
         {
             get { return songs; }
             set { SetProperty(ref songs, value); }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UsersHiddenSongsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UsersHiddenSongsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="UsersHiddenSong">
           <Key>
             <PropertyRef Name="HiddenID" />
@@ -13,11 +13,13 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="SongID" Type="int" Nullable="false" />
         </EntityType>
+        <Function Name="QueryUsersHiddenSongs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="UsersHiddenSongsModelStoreContainer">
           <EntitySet Name="UsersHiddenSong" EntityType="Self.UsersHiddenSong" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UsersHiddenSongsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -31,6 +33,9 @@
         </EntityType>
         <EntityContainer Name="UsersHiddenSongsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UsersHiddenSongs" EntityType="Self.UsersHiddenSong" />
+          <FunctionImport Name="QueryUsersHiddenSongs" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -47,6 +52,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="QueryUsersHiddenSongs" FunctionName="UsersHiddenSongsModel.Store.QueryUsersHiddenSongs" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
