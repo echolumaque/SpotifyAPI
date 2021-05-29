@@ -8,7 +8,7 @@
              xmlns:fonts="clr-namespace:SpotifyApp.Helpers.Fonts"
              x:Class="SpotifyApp.Views.AlbumSongsPage">
 
-    <ScrollView Margin="0,0,0,50">
+    <ScrollView Margin="{Binding BottomMargin}">
         <Grid RowDefinitions="300, *">
             <Frame Grid.Row="0"
                    Padding="5,10,0,0">

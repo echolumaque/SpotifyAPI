@@ -5,8 +5,11 @@ using Android.Graphics;
 using Android.OS;
 using Android.Util;
 using Android.Views;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
+using SpotifyApp.Droid.Helpers.Dependencies;
+using SpotifyApp.Helpers.Dependencies;
 
 namespace SpotifyApp.Droid
 {
@@ -93,7 +96,7 @@ namespace SpotifyApp.Droid
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register any platform specific implementations
+            containerRegistry.Register<IToast, ToastDroid>();
         }
     }
 }

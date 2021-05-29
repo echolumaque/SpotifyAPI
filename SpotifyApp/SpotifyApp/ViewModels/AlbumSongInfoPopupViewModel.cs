@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Refit;
+using SpotifyApp.Helpers.Dependencies;
 using SpotifyApp.Models;
 using Xamarin.Forms;
 
@@ -15,10 +16,14 @@ namespace SpotifyApp.ViewModels
     public class AlbumSongInfoPopupViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        public AlbumSongInfoPopupViewModel(INavigationService navigationService) : base(navigationService)
+        private IToast snackbar;
+        public AlbumSongInfoPopupViewModel(INavigationService navigationService, IToast snackbar) : base(navigationService)
         {
             this.navigationService = navigationService;
+            this.snackbar = snackbar;
+
             LikeASongCommand = new DelegateCommand(async () => await LikeASong());
+            HideASongCommand = new DelegateCommand(async () => await HideASong());
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -28,6 +33,7 @@ namespace SpotifyApp.ViewModels
             Image = submittedParameters.Images;
             SongTitle = submittedParameters.Title;
             Artist = submittedParameters.Artist;
+            albumName = submittedParameters.AlbumName;
             MenuContainerMargin = new Thickness(Prism.PrismApplicationBase.Current.MainPage.Width * 0.2, 0, 0, 0);
 
             await CheckIfUserLikedTheSong();
@@ -37,6 +43,8 @@ namespace SpotifyApp.ViewModels
 
 
         #region Properties
+
+        private string albumName;
 
         private string hiddenText;
         public string HiddenText
@@ -111,19 +119,12 @@ namespace SpotifyApp.ViewModels
         }
 
         public DelegateCommand LikeASongCommand { get; set; }
+
+        public DelegateCommand HideASongCommand { get; set; }
+
         #endregion
 
         #region Methods
-        private async Task LikeASong()
-        {
-            var song = new UserLikeSongsModel
-            {
-                SongID = songId,
-                UserID = 1
-            };
-
-            await QueryData().LikeASong(song);
-        }
 
         private async Task CheckIfUserLikedTheSong()
         {
@@ -145,6 +146,19 @@ namespace SpotifyApp.ViewModels
             }
         }
 
+        private async Task LikeASong()
+        {
+            var song = new UserLikeSongsModel
+            {
+                SongID = songId,
+                UserID = 1
+            };
+
+            await QueryData().LikeASong(song);
+            await navigationService.ClearPopupStackAsync();
+            snackbar.ShowToast("Added to Liked songs.");
+        }
+
         private async Task CheckIfUserHideTheSong()
         {
             var listOfUserHiddenSongs = await QueryData().GetUsersHiddenSongs(1);
@@ -159,6 +173,20 @@ namespace SpotifyApp.ViewModels
                 HiddenText = "Hide this Song";
                 HiddenColor = Color.FromHex("#7E7E7E");
             }
+        }
+
+        private async Task HideASong()
+        {
+            var song = new UserLikeSongsModel
+            {
+                SongID = songId,
+                UserID = 1
+            };
+
+            await QueryData().HideASong(song);
+
+            await navigationService.ClearPopupStackAsync();
+            snackbar.ShowToast($"Hidden in {albumName}.");
         }
         #endregion
     }

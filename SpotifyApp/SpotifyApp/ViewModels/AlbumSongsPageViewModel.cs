@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using SpotifyApp.Helpers.API;
+using SpotifyApp.Helpers;
 using SpotifyApp.Models;
 using Xamarin.Forms;
 
@@ -48,9 +46,17 @@ namespace SpotifyApp.ViewModels
                 Songs[i].GotoSongInfoCommand = new DelegateCommand<AlbumsModel>(async (songInfo) => await GotoAlbumSongInfoPage(songInfo));
             });
 
+            BottomMargin = new Thickness(0, 0, 0, Prism.PrismApplicationBase.Current.MainPage.Height * 0.05);
         }
 
         #region Properties
+
+        private Thickness bottomMargin;
+        public Thickness BottomMargin
+        {
+            get { return bottomMargin; }
+            set { SetProperty(ref bottomMargin, value); }
+        }
 
         private IEnumerable<AlbumsModel> notHiddenSongs;
         private IEnumerable<AlbumsModel> hiddenSongs;
@@ -122,7 +128,8 @@ namespace SpotifyApp.ViewModels
                         Images =  albumsModel.Images,
                         Title = albumsModel.Title,
                         Artist = albumsModel.Artist,
-                        SongId = albumsModel.SongId
+                        SongId = albumsModel.SongId,
+                        AlbumName = albumsModel.AlbumName
                     }
                 }
             };

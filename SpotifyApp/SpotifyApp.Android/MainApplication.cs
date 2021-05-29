@@ -1,6 +1,7 @@
 using System;
 using Android.App;
 using Android.Runtime;
+using Plugin.CurrentActivity;
 
 namespace SpotifyApp.Droid
 {
@@ -17,6 +18,7 @@ namespace SpotifyApp.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+            CrossCurrentActivity.Current.Init(this);
             Xamarin.Essentials.Platform.Init(this);
         }
     }
