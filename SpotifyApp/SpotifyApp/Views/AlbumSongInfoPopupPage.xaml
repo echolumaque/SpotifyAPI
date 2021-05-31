@@ -27,7 +27,7 @@
             <Label Text="{Binding Artist}"
                    HorizontalOptions="CenterAndExpand"
                    FontFamily="Regular"
-                   TextColor="#7E7E7E"
+                   TextColor="{StaticResource SpotifyGray}"
                    FontSize="15"/>
 
             <StackLayout Margin="{Binding MenuContainerMargin}"
@@ -71,13 +71,16 @@
                         <FormattedString>
                             <Span Text="{x:Static fonts:Material.Playlist_add}"
                                   FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                                  TextColor="{StaticResource SpotifyGray}"/>
                             <Span Text="     "/>
                             <Span Text="Add to Playlist"
                                   TextColor="White"
                                   FontFamily="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GotoPlaylistPageCommand}"/>
+                    </Label.GestureRecognizers>
                 </Label>
 
                 <Label HorizontalOptions="Start">
@@ -85,7 +88,7 @@
                         <FormattedString>
                             <Span Text="{x:Static fonts:Material.Queue_music}"
                                   FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                                  TextColor="{StaticResource SpotifyGray}"/>
                             <Span Text="     "/>
                             <Span Text="Add to Queue"
                                   TextColor="White"
@@ -99,7 +102,7 @@
                         <FormattedString>
                             <Span Text="{x:Static fonts:Material.Person}"
                                   FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                                  TextColor="{StaticResource SpotifyGray}"/>
                             <Span Text="     "/>
                             <Span Text="View Artists"
                                   TextColor="White"
@@ -113,7 +116,7 @@
                         <FormattedString>
                             <Span Text="{x:Static fonts:Material.Share}"
                                   FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                                  TextColor="{StaticResource SpotifyGray}"/>
                             <Span Text="     "/>
                             <Span Text="Share"
                                   TextColor="White"
@@ -127,7 +130,7 @@
                         <FormattedString>
                             <Span Text="{x:Static fonts:Material.Settings_input_antenna}"
                                   FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                                  TextColor="{StaticResource SpotifyGray}"/>
                             <Span Text="     "/>
                             <Span Text="Go to Song Radio"
                                   TextColor="White"
@@ -142,7 +145,7 @@
                         <FormattedString>
                             <Span Text="{x:Static fonts:Material.People}"
                                   FontFamily="mat"
-                                  TextColor="#7E7E7E"/>
+                                  TextColor="{StaticResource SpotifyGray}"/>
                             <Span Text="     "/>
                             <Span Text="Show Credits"
                                   TextColor="White"

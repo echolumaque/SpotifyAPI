@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#121212"
+             Padding="0,50,0,0"
+             x:Class="SpotifyApp.Views.PlaylistPage">
+
+    <StackLayout>
+        <Button Text="New Playlist"
+                FontFamily="Bold"
+                TextColor="Black"
+                BackgroundColor="{StaticResource SpotifyGreen}"
+                HorizontalOptions="Center"
+                CornerRadius="30"
+                WidthRequest="150"/>
+        <CollectionView ItemsSource="{Binding Playlists}"
+                        ItemSizingStrategy="MeasureAllItems">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0,10">
+                            <Image Source="{Binding PlaylistImage}"
+                                   HeightRequest="60"
+                                   WidthRequest="60"/>
+
+                            <Label VerticalTextAlignment="Center"
+                                   Margin="5,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding PlaylistName}"
+                                              TextColor="White"
+                                              FontFamily="Bold"/>
+                                        <Span Text="&#10;"/>
+                                        <Span Text="by Echo Lumaque"
+                                              TextColor="{StaticResource SpotifyGray}"
+                                              FontFamily="Regular"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+  
+</ContentPage>

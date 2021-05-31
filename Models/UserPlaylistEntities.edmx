@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UserPlaylistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="PlaylistID" />
+          </Key>
+          <Property Name="PlaylistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlaylistName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PlaylistImage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlaylistSongs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SongID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PlaylistID" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="QueryUserPlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="QueryUserPlaylistName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="UserPlaylistModelStoreContainer">
+          <EntitySet Name="Playlist" EntityType="Self.Playlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaylistSongs" EntityType="Self.PlaylistSongs" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserPlaylistModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="PlaylistID" />
+          </Key>
+          <Property Name="PlaylistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaylistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PlaylistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlaylistSong">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SongID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PlaylistID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="UserPlaylistEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Playlists" EntityType="Self.Playlist" />
+          <EntitySet Name="PlaylistSongs" EntityType="Self.PlaylistSong" />
+          <FunctionImport Name="QueryUserPlaylist" ReturnType="Collection(UserPlaylistModel.QueryUserPlaylist_Result)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="QueryUserPlaylistName" ReturnType="Collection(UserPlaylistModel.QueryUserPlaylistName_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="QueryUserPlaylist_Result">
+          <Property Type="String" Name="PlaylistName" Nullable="false" />
+          <Property Type="String" Name="PlaylistImage" Nullable="false" />
+          <Property Type="Int32" Name="PlaylistID" Nullable="false" />
+          <Property Type="String" Name="Images" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="String" Name="Artist" Nullable="false" />
+          <Property Type="Int32" Name="Duration" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="QueryUserPlaylistName_Result">
+          <Property Type="String" Name="PlaylistName" Nullable="false" />
+          <Property Type="String" Name="PlaylistImage" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserPlaylistModelStoreContainer" CdmEntityContainer="UserPlaylistEntities">
+          <EntitySetMapping Name="Playlists">
+            <EntityTypeMapping TypeName="UserPlaylistModel.Playlist">
+              <MappingFragment StoreEntitySet="Playlist">
+                <ScalarProperty Name="PlaylistID" ColumnName="PlaylistID" />
+                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
+                <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaylistSongs">
+            <EntityTypeMapping TypeName="UserPlaylistModel.PlaylistSong">
+              <MappingFragment StoreEntitySet="PlaylistSongs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SongID" ColumnName="SongID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PlaylistID" ColumnName="PlaylistID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="QueryUserPlaylist" FunctionName="UserPlaylistModel.Store.QueryUserPlaylist">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserPlaylistModel.QueryUserPlaylist_Result">
+                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
+                <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
+                <ScalarProperty Name="PlaylistID" ColumnName="PlaylistID" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="QueryUserPlaylistName" FunctionName="UserPlaylistModel.Store.QueryUserPlaylistName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserPlaylistModel.QueryUserPlaylistName_Result">
+                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
+                <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

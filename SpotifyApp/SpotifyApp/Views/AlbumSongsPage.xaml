@@ -46,7 +46,7 @@
                         </Label.FormattedText>
                     </Label>
 
-                    <Button BackgroundColor="#1ED760"
+                    <Button BackgroundColor="{StaticResource SpotifyGreen}"
                             Text="Shuffle play"
                             FontSize="12"
                             TextColor="Black"

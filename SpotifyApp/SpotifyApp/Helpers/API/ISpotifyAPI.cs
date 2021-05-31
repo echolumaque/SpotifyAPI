@@ -24,5 +24,17 @@ namespace SpotifyApp.Helpers.API
 
         [Post("/usershiddensongs/hide")]
         Task HideASong([Body] UserLikeSongsModel userHideModel);
+
+        [Get("/UsersPlaylist/playlistsongs?userId={userId}")]
+        Task<IEnumerable<Playlist>> GetUserPlaylistSongs(int userId);
+
+        [Get("/UsersPlaylist/playlistname?userId={userId}")]
+        Task<IEnumerable<Playlist>> GetUserPlaylists(int userId);
+
+        [Post("/UsersPlaylist/addsong")]
+        Task AddSongToPlaylist(AddPlaylistSongModel addPlaylistSongModel);
+
+        [Post("/UsersPlaylist/addplaylist")]
+        Task AddNewPlaylist(AddNewPlaylistModel addNewPlaylistModel);
     }
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using Refit;
 using SpotifyApp.Helpers.Dependencies;
 using SpotifyApp.Models;
 using Xamarin.Forms;
@@ -24,6 +19,7 @@ namespace SpotifyApp.ViewModels
 
             LikeASongCommand = new DelegateCommand(async () => await LikeASong());
             HideASongCommand = new DelegateCommand(async () => await HideASong());
+            GotoPlaylistPageCommand = new DelegateCommand(async () => await GotoPlaylistPage());
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -34,6 +30,7 @@ namespace SpotifyApp.ViewModels
             SongTitle = submittedParameters.Title;
             Artist = submittedParameters.Artist;
             albumName = submittedParameters.AlbumName;
+            duration = submittedParameters.Duration;
             MenuContainerMargin = new Thickness(Prism.PrismApplicationBase.Current.MainPage.Width * 0.2, 0, 0, 0);
 
             await CheckIfUserLikedTheSong();
@@ -43,6 +40,8 @@ namespace SpotifyApp.ViewModels
 
 
         #region Properties
+
+        private int duration;
 
         private string albumName;
 
@@ -122,6 +121,8 @@ namespace SpotifyApp.ViewModels
 
         public DelegateCommand HideASongCommand { get; set; }
 
+        public DelegateCommand GotoPlaylistPageCommand { get; set; }
+
         #endregion
 
         #region Methods
@@ -188,6 +189,25 @@ namespace SpotifyApp.ViewModels
             await navigationService.ClearPopupStackAsync();
             snackbar.ShowToast($"Hidden in {albumName}.");
         }
+
+        private async Task GotoPlaylistPage()
+        {
+            var parameters = new NavigationParameters
+            {
+                {
+                    "playlist",
+                    new AlbumsModel
+                    {
+                        Title = SongTitle,
+                        Images = Image,
+                        Duration = duration,
+                        Artist = Artist
+                    }
+                }
+            };
+            await navigationService.NavigateAsync("PlaylistPage", parameters);
+        }
+
         #endregion
     }
 }

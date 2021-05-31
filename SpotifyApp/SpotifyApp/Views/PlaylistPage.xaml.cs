@@ -2,9 +2,9 @@
 
 namespace SpotifyApp.Views
 {
-    public partial class NewPlaylistPage : ContentPage
+    public partial class PlaylistPage : ContentPage
     {
-        public NewPlaylistPage()
+        public PlaylistPage()
         {
             InitializeComponent();
         }

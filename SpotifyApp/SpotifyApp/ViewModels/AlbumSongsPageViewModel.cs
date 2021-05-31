@@ -28,7 +28,7 @@ namespace SpotifyApp.ViewModels
             Artist = submitedParameter.Artist;
             Year = submitedParameter.Year;
 
-            var listOfUsersHiddenSongs = await QueryData().GetUsersHiddenSongs(3);
+            var listOfUsersHiddenSongs = await QueryData().GetUsersHiddenSongs(1);
 
             Songs = new ModifiedObservableCollection<AlbumsModel>();
 
@@ -129,7 +129,8 @@ namespace SpotifyApp.ViewModels
                         Title = albumsModel.Title,
                         Artist = albumsModel.Artist,
                         SongId = albumsModel.SongId,
-                        AlbumName = albumsModel.AlbumName
+                        AlbumName = albumsModel.AlbumName,
+                        Duration = albumsModel.Duration
                     }
                 }
             };
