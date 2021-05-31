@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              x:Class="SpotifyApp.App">
-  <Application.Resources>
+    <Application.Resources>
 
-    <!-- Application resource dictionary -->
+        <Color x:Key="SpotifyGreen">#1ED760</Color>
+        <Color x:Key="SpotifyGray">#7E7E7E</Color>
 
-  </Application.Resources>
+    </Application.Resources>
 </prism:PrismApplication>

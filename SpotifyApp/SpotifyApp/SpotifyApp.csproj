@@ -31,6 +31,9 @@
     <Compile Update="Views\AlbumSongsPage.xaml.cs">
       <DependentUpon>AlbumSongsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PlaylistPage.xaml.cs">
+      <DependentUpon>PlaylistPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SongPage.xaml.cs">
       <DependentUpon>SongPage.xaml</DependentUpon>
     </Compile>
@@ -49,7 +52,7 @@
     <EmbeddedResource Update="Views\AlbumSongsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\NewPlaylistPage.xaml">
+    <EmbeddedResource Update="Views\PlaylistPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SongPage.xaml">
