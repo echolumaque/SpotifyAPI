@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.Ajax.Utilities;
 using Spotify.Helpers;
 using Spotify.Models;
 
@@ -11,15 +10,15 @@ namespace Spotify.Controllers
     [RoutePrefix("UsersPlaylist")]
     public class UsersPlaylistController : BaseApiController
     {
-        [HttpGet]
+        [HttpGet] //song for each playlist
         [Route("playlistsongs")]
-        public IHttpActionResult GetUserPlaylistSong(int userId)
+        public IHttpActionResult GetUserPlaylistSong(int userId, int playlistId)
         {
             try
             {
                 using (var playlist = new UserPlaylistEntities())
                 {
-                    return UserExist(userId) ? Ok(playlist.QueryUserPlaylist(userId).ToList()) :
+                    return UserExist(userId) ? Ok(playlist.QueryUserPlaylist(userId, playlistId).ToList()) :
                         Content(System.Net.HttpStatusCode.NotFound, new { Message = $"User with user id: {userId} is not found on the database" });
                 }
             }

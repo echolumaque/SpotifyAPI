@@ -25,6 +25,7 @@
         </EntityType>
         <Function Name="QueryUserPlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="PlayistID" Type="int" Mode="In" />
         </Function>
         <Function Name="QueryUserPlaylistName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
@@ -60,15 +61,13 @@
           <EntitySet Name="PlaylistSongs" EntityType="Self.PlaylistSong" />
           <FunctionImport Name="QueryUserPlaylist" ReturnType="Collection(UserPlaylistModel.QueryUserPlaylist_Result)">
           <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PlayistID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="QueryUserPlaylistName" ReturnType="Collection(UserPlaylistModel.QueryUserPlaylistName_Result)">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="QueryUserPlaylist_Result">
-          <Property Type="String" Name="PlaylistName" Nullable="false" />
-          <Property Type="String" Name="PlaylistImage" Nullable="false" />
-          <Property Type="Int32" Name="PlaylistID" Nullable="false" />
           <Property Type="String" Name="Images" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" />
           <Property Type="String" Name="Artist" Nullable="false" />
@@ -77,6 +76,7 @@
         <ComplexType Name="QueryUserPlaylistName_Result">
           <Property Type="String" Name="PlaylistName" Nullable="false" />
           <Property Type="String" Name="PlaylistImage" Nullable="false" />
+          <Property Type="Int32" Name="PlaylistID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -107,9 +107,6 @@
           <FunctionImportMapping FunctionImportName="QueryUserPlaylist" FunctionName="UserPlaylistModel.Store.QueryUserPlaylist">
             <ResultMapping>
               <ComplexTypeMapping TypeName="UserPlaylistModel.QueryUserPlaylist_Result">
-                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
-                <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
-                <ScalarProperty Name="PlaylistID" ColumnName="PlaylistID" />
                 <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Artist" ColumnName="Artist" />
@@ -122,6 +119,7 @@
               <ComplexTypeMapping TypeName="UserPlaylistModel.QueryUserPlaylistName_Result">
                 <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
                 <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
+                <ScalarProperty Name="PlaylistID" ColumnName="PlaylistID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

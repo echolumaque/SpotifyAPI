@@ -30,13 +30,17 @@ namespace Spotify.Models
         public virtual DbSet<Playlist> Playlists { get; set; }
         public virtual DbSet<PlaylistSong> PlaylistSongs { get; set; }
     
-        public virtual ObjectResult<QueryUserPlaylist_Result> QueryUserPlaylist(Nullable<int> userID)
+        public virtual ObjectResult<QueryUserPlaylist_Result> QueryUserPlaylist(Nullable<int> userID, Nullable<int> playistID)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
                 new ObjectParameter("UserID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<QueryUserPlaylist_Result>("QueryUserPlaylist", userIDParameter);
+            var playistIDParameter = playistID.HasValue ?
+                new ObjectParameter("PlayistID", playistID) :
+                new ObjectParameter("PlayistID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<QueryUserPlaylist_Result>("QueryUserPlaylist", userIDParameter, playistIDParameter);
         }
     
         public virtual ObjectResult<QueryUserPlaylistName_Result> QueryUserPlaylistName(Nullable<int> userID)

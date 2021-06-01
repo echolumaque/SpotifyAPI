@@ -13,9 +13,6 @@ namespace Spotify.Models
     
     public partial class QueryUserPlaylist_Result
     {
-        public string PlaylistName { get; set; }
-        public string PlaylistImage { get; set; }
-        public int PlaylistID { get; set; }
         public string Images { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
