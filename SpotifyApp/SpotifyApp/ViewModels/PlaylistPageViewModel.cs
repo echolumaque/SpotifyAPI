@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using SpotifyApp.Helpers.Dependencies;
 using SpotifyApp.Models;
 
 namespace SpotifyApp.ViewModels
@@ -13,20 +14,29 @@ namespace SpotifyApp.ViewModels
     public class PlaylistPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        public PlaylistPageViewModel(INavigationService navigationService) : base(navigationService)
+        private IToast toast;
+        public PlaylistPageViewModel(INavigationService navigationService, IToast toast) : base(navigationService)
         {
             this.navigationService = navigationService;
+            this.toast = toast;
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             var submittedParameter = parameters.GetValue<AlbumsModel>("playlist");
-            var rawData = await QueryData().GetUserPlaylists(3);
+            songID = submittedParameter.SongId;
 
-            Playlists = new ObservableCollection<Playlist>(rawData);
+            Playlists = new ObservableCollection<Playlist>(await QueryData().GetUserPlaylists(1));
+
+            Parallel.For(0, Playlists.Count(), i =>
+            {
+                Playlists.ElementAt(i).AddSongToPlaylistCommand = new DelegateCommand<Playlist>(async (song) => await AddSongToPlaylist(song));
+            });
         }
 
         #region Properties
+
+        private int songID;
 
         private IEnumerable<Playlist> playlist;
         public IEnumerable<Playlist> Playlists
@@ -37,6 +47,19 @@ namespace SpotifyApp.ViewModels
         #endregion
 
         #region Methods
+
+        private async Task AddSongToPlaylist(Playlist playlist)
+        {
+            var songToAdd = new AddPlaylistSongModel
+            {
+                PlaylistID = playlist.PlaylistID,
+                SongID = songID,
+                UserID = 1
+            };
+
+            await QueryData().AddSongToPlaylist(songToAdd);
+            toast.ShowToast($"Added to {playlist.PlaylistName}");
+        }
         #endregion
     }
 }

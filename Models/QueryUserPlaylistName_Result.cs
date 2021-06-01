@@ -15,5 +15,6 @@ namespace Spotify.Models
     {
         public string PlaylistName { get; set; }
         public string PlaylistImage { get; set; }
+        public int PlaylistID { get; set; }
     }
 }

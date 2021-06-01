@@ -198,10 +198,7 @@ namespace SpotifyApp.ViewModels
                     "playlist",
                     new AlbumsModel
                     {
-                        Title = SongTitle,
-                        Images = Image,
-                        Duration = duration,
-                        Artist = Artist
+                        SongId = songId
                     }
                 }
             };
