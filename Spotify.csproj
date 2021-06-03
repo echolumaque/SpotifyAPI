@@ -190,6 +190,7 @@
     <Compile Include="Helpers\CompressAttribute.cs" />
     <Compile Include="Helpers\EncryptAttribute.cs" />
     <Compile Include="Helpers\ForceHTTPSAttribute.cs" />
+    <Compile Include="Models\AddNewPlaylistSongModel.cs" />
     <Compile Include="Models\Album.cs">
       <DependentUpon>AlbumsEntities.tt</DependentUpon>
     </Compile>

@@ -15,7 +15,9 @@
                 BackgroundColor="{StaticResource SpotifyGreen}"
                 HorizontalOptions="Center"
                 CornerRadius="30"
-                WidthRequest="150"/>
+                WidthRequest="150"
+                Command="{Binding AddNewPlaylistCommand}"/>
+        
         <CollectionView ItemsSource="{Binding Playlists}"
                         ItemSizingStrategy="MeasureAllItems">
             <CollectionView.ItemTemplate>

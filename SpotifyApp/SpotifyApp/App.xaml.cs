@@ -40,6 +40,7 @@ namespace SpotifyApp
             containerRegistry.RegisterForNavigation<AlbumSongInfoPopupPage, AlbumSongInfoPopupViewModel>();
             containerRegistry.RegisterPopupNavigationService();
             containerRegistry.RegisterForNavigation<PlaylistPage, PlaylistPageViewModel>();
+            containerRegistry.RegisterForNavigation<NewPlaylistPagePopup, NewPlaylistPagePopupViewModel>();
         }
     }
 }

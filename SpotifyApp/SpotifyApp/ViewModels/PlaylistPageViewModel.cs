@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -19,13 +22,18 @@ namespace SpotifyApp.ViewModels
         {
             this.navigationService = navigationService;
             this.toast = toast;
+            AddNewPlaylistCommand = new DelegateCommand(async () => await AddNewPlaylist());
+        }
+
+        public override async void Initialize(INavigationParameters parameters)
+        {
+            var submittedParameter = parameters.GetValue<AlbumsModel>("playlist");
+            songID = submittedParameter.SongId;
+            image = submittedParameter.Images;
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            var submittedParameter = parameters.GetValue<AlbumsModel>("playlist");
-            songID = submittedParameter.SongId;
-
             Playlists = new ObservableCollection<Playlist>(await QueryData().GetUserPlaylists(1));
 
             Parallel.For(0, Playlists.Count(), i =>
@@ -36,6 +44,9 @@ namespace SpotifyApp.ViewModels
 
         #region Properties
 
+        public DelegateCommand AddNewPlaylistCommand { get; set; }
+
+        private string image;
         private int songID;
 
         private IEnumerable<Playlist> playlist;
@@ -48,7 +59,7 @@ namespace SpotifyApp.ViewModels
 
         #region Methods
 
-        private async Task AddSongToPlaylist(Playlist playlist)
+        private async Task AddSongToPlaylist(Playlist playlist) //existing playlist
         {
             var songToAdd = new AddPlaylistSongModel
             {
@@ -59,6 +70,23 @@ namespace SpotifyApp.ViewModels
 
             await QueryData().AddSongToPlaylist(songToAdd);
             toast.ShowToast($"Added to {playlist.PlaylistName}");
+        }
+
+        private async Task AddNewPlaylist() 
+        {
+            var parameters = new NavigationParameters
+            {
+                {
+                    "songAndPlaylist",
+                    new AlbumsModel
+                    {
+                        SongId = songID,
+                        Images = image
+                    }
+                }
+            };
+
+            await navigationService.NavigateAsync("NewPlaylistPagePopup", parameters);
         }
         #endregion
     }
