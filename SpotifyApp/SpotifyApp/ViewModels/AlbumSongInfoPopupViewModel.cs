@@ -198,7 +198,8 @@ namespace SpotifyApp.ViewModels
                     "playlist",
                     new AlbumsModel
                     {
-                        SongId = songId
+                        SongId = songId,
+                        Images = Image
                     }
                 }
             };

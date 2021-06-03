@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:prism="http://prismlibrary.com"
+                 prism:ViewModelLocator.AutowireViewModel="True"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+                 HasSystemPadding="True"
+                 HasKeyboardOffset="True"
+                 prism:DialogLayout.CloseOnBackgroundTapped="True"
+                 xmlns:renderer="clr-namespace:SpotifyApp.Helpers.CustomRenderers"
+                 x:Class="SpotifyApp.Views.NewPlaylistPagePopup">
+
+    <popup:PopupPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="0,1">
+            <GradientStop Color="#7E7E7E"
+                          Offset="0.1"/>
+            <GradientStop Color="#131313"
+                          Offset="1.0"/>
+        </LinearGradientBrush>
+    </popup:PopupPage.Background>
+
+    <StackLayout VerticalOptions="CenterAndExpand"
+                 HorizontalOptions="CenterAndExpand">
+
+        <Label Text="Give your playlist a name."
+               TextColor="White"
+               FontFamily="Bold"/>
+
+        <renderer:CustomEntry FontAttributes="Bold"
+                              TextColor="White"
+                              Text="{Binding PlaylistName}"/>
+
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="Center"
+                     Spacing="50">
+            <Label Text="CANCEL"
+                   FontFamily="Regular"
+                   TextColor="LightGray">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopStackCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Text="SUBMIT"
+                   FontFamily="Regular"
+                   TextColor="{StaticResource SpotifyGreen}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddPlaylistCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </StackLayout>
+</popup:PopupPage>
