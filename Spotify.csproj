@@ -177,6 +177,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersPlaylistController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -209,11 +210,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AlbumsEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Artist.cs">
+      <DependentUpon>ArtistEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArtistEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArtistEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArtistEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArtistEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArtistEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArtistEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArtistTopSong.cs">
+      <DependentUpon>ArtistEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Playlist.cs">
       <DependentUpon>UserPlaylistEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PlaylistSong.cs">
       <DependentUpon>UserPlaylistEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QueryArtistTopSongs_Result.cs">
+      <DependentUpon>ArtistEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QueryUserPlaylistName_Result.cs">
       <DependentUpon>UserPlaylistEntities.tt</DependentUpon>
@@ -314,6 +339,16 @@
       <DependentUpon>AlbumsEntities.edmx</DependentUpon>
       <LastGenOutput>AlbumsEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\ArtistEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ArtistEntities.edmx</DependentUpon>
+      <LastGenOutput>ArtistEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ArtistEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ArtistEntities.edmx</DependentUpon>
+      <LastGenOutput>ArtistEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\UserPlaylistEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserPlaylistEntities.edmx</DependentUpon>
@@ -409,6 +444,13 @@
     </EntityDeploy>
     <Content Include="Models\UserPlaylistEntities.edmx.diagram">
       <DependentUpon>UserPlaylistEntities.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ArtistEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ArtistEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ArtistEntities.edmx.diagram">
+      <DependentUpon>ArtistEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
