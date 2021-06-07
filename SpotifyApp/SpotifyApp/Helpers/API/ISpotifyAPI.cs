@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using Refit;
 using SpotifyApp.Models;
 
@@ -38,5 +37,11 @@ namespace SpotifyApp.Helpers.API
 
         [Post("/UsersPlaylist/addplaylist")]
         Task AddNewPlaylist(ArrayList arrayList); //adds new playlist then adds the song frm the enwly created playlist.
+
+        [Get("/artists/artistinfo?userId={userId}&artistName={artistName}")]
+        Task<ArtistInfoModel> GetArtistInfo(int userId, string artistName);
+
+        [Get("/artists/ArtistTopSongs?userId={userId}&artistName={artistName}")]
+        Task<IEnumerable<ArtistTopSongsModel>> GetArtistTopSongs(int userId, string artistName);
     }
 }

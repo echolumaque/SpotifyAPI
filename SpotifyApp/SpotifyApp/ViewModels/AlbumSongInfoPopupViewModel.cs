@@ -20,6 +20,7 @@ namespace SpotifyApp.ViewModels
             LikeASongCommand = new DelegateCommand(async () => await LikeASong());
             HideASongCommand = new DelegateCommand(async () => await HideASong());
             GotoPlaylistPageCommand = new DelegateCommand(async () => await GotoPlaylistPage());
+            GotoArtistPageCommand = new DelegateCommand<string>(async (artist) => await GotoArtistPage(artist));
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -123,6 +124,8 @@ namespace SpotifyApp.ViewModels
 
         public DelegateCommand GotoPlaylistPageCommand { get; set; }
 
+        public DelegateCommand<string> GotoArtistPageCommand { get; set; }
+
         #endregion
 
         #region Methods
@@ -206,6 +209,18 @@ namespace SpotifyApp.ViewModels
             await navigationService.NavigateAsync("PlaylistPage", parameters);
         }
 
+        private async Task GotoArtistPage(string artistName)
+        {
+            var parameter = new NavigationParameters
+            {
+                {
+                    "artist",
+                    artistName
+                }
+            };
+
+            await navigationService.NavigateAsync("ArtistPage", parameter);
+        }
         #endregion
     }
 }
