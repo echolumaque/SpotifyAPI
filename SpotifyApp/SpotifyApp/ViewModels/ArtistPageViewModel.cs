@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using Prism.Events;
 using Prism.Navigation;
+using SpotifyApp.Helpers;
 using SpotifyApp.Models;
 
 namespace SpotifyApp.ViewModels
@@ -7,9 +9,10 @@ namespace SpotifyApp.ViewModels
     public class ArtistPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        public ArtistPageViewModel(INavigationService navigationService) : base(navigationService)
+        public ArtistPageViewModel(INavigationService navigationService, IEventAggregator ea) : base(navigationService)
         {
             this.navigationService = navigationService;
+            ea.GetEvent<HeightEventAggregator>().Subscribe(Testing);
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -20,11 +23,37 @@ namespace SpotifyApp.ViewModels
             ArtistName = artistInfo.Artist1;
             Followers = artistInfo.Followers;
             Image = artistInfo.Image;
+            Test = 400;
+            TopSongs = new ModifiedObservableCollection<ArtistTopSongsModel>(await QueryData().GetArtistTopSongs(1, artist));
+            ScreenWidth = Prism.PrismApplicationBase.Current.MainPage.Width;
 
-            TopSongs = new ObservableCollection<ArtistTopSongsModel>(await QueryData().GetArtistTopSongs(1, artist));
+            PanelHeight = 920;
+        }
+        void Testing(double test) => PanelHeight = test;
+
+
+        private double panelHeight;
+        public double PanelHeight
+        {
+            get { return panelHeight; }
+            set { SetProperty(ref panelHeight, value); }
+        }
+        #region Properties
+
+        private double test;
+        public double Test
+        {
+            get { return test; }
+            set { SetProperty(ref test, value); }
         }
 
-        #region Properties
+        private double screenWidth;
+        public double ScreenWidth
+        {
+            get { return screenWidth; }
+            set { SetProperty(ref screenWidth, value); }
+        }
+
         private string artistName;
         public string ArtistName
         {
@@ -46,8 +75,8 @@ namespace SpotifyApp.ViewModels
             set { SetProperty(ref image, value); }
         }
 
-        private ObservableCollection<ArtistTopSongsModel> topSongs;
-        public ObservableCollection<ArtistTopSongsModel> TopSongs
+        private ModifiedObservableCollection<ArtistTopSongsModel> topSongs;
+        public ModifiedObservableCollection<ArtistTopSongsModel> TopSongs
         {
             get { return topSongs; }
             set { SetProperty(ref topSongs, value); }

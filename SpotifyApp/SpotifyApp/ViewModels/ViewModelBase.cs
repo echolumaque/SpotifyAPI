@@ -57,5 +57,6 @@ namespace SpotifyApp.ViewModels
         };
 
         public static ISpotifyAPI QueryData() => RestService.For<ISpotifyAPI>(Endpoint);
+
     }
 }

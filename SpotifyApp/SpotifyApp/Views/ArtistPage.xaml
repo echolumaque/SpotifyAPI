@@ -2,7 +2,94 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             NavigationPage.HasNavigationBar="False"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:parallax="clr-namespace:DevsDNA.XFParallax;assembly=DevsDNA.XFParallax"
+             BackgroundColor="Black"
+             xmlns:fonts="clr-namespace:SpotifyApp.Helpers.Fonts"
              x:Class="SpotifyApp.Views.ArtistPage">
-  
+
+    <StackLayout>
+        <Frame BackgroundColor="Transparent"
+               Padding="0"
+               HeightRequest="{Binding PanelHeight}">
+            <Grid>
+                <Image Source="{Binding Image}"
+                       WidthRequest="{Binding ScreenWidth}"
+                       x:Name="panel"
+                       HorizontalOptions="FillAndExpand"/>
+
+                <StackLayout VerticalOptions="End"
+                             Spacing="15"
+                             Margin="0,0,0,15">
+
+                    <Label Text="{Binding ArtistName}"
+                           FontFamily="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           FontSize="40"/>
+
+                    <Label Text="{Binding Followers, StringFormat='{0} FOLLOWERS', Converter={StaticResource CommaSeperated}}"
+                           FontFamily="Regular"
+                           TextColor="{StaticResource SpotifyGray}"
+                           HorizontalOptions="Center"     
+                           FontSize="14"/>
+
+                    <Button Text="Shuffle Play"
+                            BackgroundColor="{StaticResource SpotifyGreen}"
+                            TextColor="Black"
+                            FontFamily="Bold"
+                            HorizontalOptions="Center"
+                            CornerRadius="30"
+                            HeightRequest="40"
+                            Padding="10"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <CollectionView Scrolled="CollectionView_Scrolled"
+                        ItemsSource="{Binding TopSongs}"
+                        Margin="0,0,0,50"
+                        ItemSizingStrategy="MeasureAllItems">
+            <CollectionView.Header>
+                <Label Text="Popular"
+                       FontFamily="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontSize="18"
+                       Margin="0,10"/>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="0,10">
+                        <Grid ColumnDefinitions="40, *, Auto">
+                            <Image Source="{Binding Image}"
+                                   Grid.Column="0"
+                                   HeightRequest="40"/>
+
+                            <Label Grid.Column="1"
+                                   FontFamily="Regular">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Title}"
+                                              TextColor="White"/>
+                                        <Span Text="&#10;"/>
+                                        <Span Text="{Binding Artist}"
+                                              TextColor="{StaticResource SpotifyGray}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Text="{x:Static fonts:Material.More_vert}"
+                                   FontFamily="mat"
+                                   TextColor="White"
+                                   Grid.Column="2"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>

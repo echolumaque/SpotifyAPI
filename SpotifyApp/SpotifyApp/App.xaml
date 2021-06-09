@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             x:Class="SpotifyApp.App">
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="http://prismlibrary.com"
+                        xmlns:converters ="clr-namespace:SpotifyApp.Helpers.Converters"       
+                        x:Class="SpotifyApp.App">
     <Application.Resources>
 
         <Color x:Key="SpotifyGreen">#1ED760</Color>
         <Color x:Key="SpotifyGray">#7E7E7E</Color>
 
+        <converters:CommaSeperatorConverter x:Key="CommaSeperated"/>
     </Application.Resources>
 </prism:PrismApplication>
