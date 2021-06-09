@@ -3,6 +3,7 @@ using Prism.Ioc;
 using Prism.Plugin.Popups;
 using SpotifyApp.ViewModels;
 using SpotifyApp.Views;
+using Syncfusion.Licensing;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -24,8 +25,8 @@ namespace SpotifyApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("NavigationPage/MainTabbedPage?createTab=HomePage&createTab=HomePage");
+            SyncfusionLicenseProvider.RegisterLicense("NDU2NzQ4QDMxMzkyZTMxMmUzMFlMZE54SzRHSDhHTUhEZWt5OUZIY3pvT2wwVC90bTI0cm5ERDFCb24zVUk9");
+            await NavigationService.NavigateAsync("NavigationPage/MainTabbedPage?createTab=HomePage&createTab=HomePage"/*"ArtistPage"*/);
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -43,5 +44,7 @@ namespace SpotifyApp
             containerRegistry.RegisterForNavigation<NewPlaylistPagePopup, NewPlaylistPagePopupViewModel>();
             containerRegistry.RegisterForNavigation<ArtistPage, ArtistPageViewModel>();
         }
+
+        
     }
 }

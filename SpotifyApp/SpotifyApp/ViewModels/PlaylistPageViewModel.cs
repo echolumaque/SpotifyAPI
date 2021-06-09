@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using SpotifyApp.Helpers.Dependencies;
 using SpotifyApp.Models;
@@ -25,7 +20,7 @@ namespace SpotifyApp.ViewModels
             AddNewPlaylistCommand = new DelegateCommand(async () => await AddNewPlaylist());
         }
 
-        public override async void Initialize(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
             var submittedParameter = parameters.GetValue<AlbumsModel>("playlist");
             songID = submittedParameter.SongId;
