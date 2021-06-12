@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Http;
 using Prism;
 using Prism.Ioc;
 using Prism.Plugin.Popups;
@@ -45,6 +47,13 @@ namespace SpotifyApp
             containerRegistry.RegisterForNavigation<ArtistPage, ArtistPageViewModel>();
         }
 
-        
+        //statics
+        public static WebClient Client()
+        {
+            using (var client = new WebClient())
+            {
+                return client;
+            }
+        }
     }
 }

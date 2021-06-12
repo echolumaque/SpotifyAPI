@@ -1,21 +1,27 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Threading.Tasks;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using SpotifyApp.Helpers;
 using SpotifyApp.Models;
+using Xamarin.Forms;
 
 namespace SpotifyApp.ViewModels
 {
     public class ArtistPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        public ArtistPageViewModel(INavigationService navigationService, IEventAggregator ea) : base(navigationService)
+        private IEventAggregator eventAggregator;
+        public ArtistPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator) : base(navigationService)
         {
             this.navigationService = navigationService;
-            ea.GetEvent<HeightEventAggregator>().Subscribe(Testing);
+            this.eventAggregator = eventAggregator;
+            eventAggregator.GetEvent<HeightEventAggregator>().Subscribe(ChangeHeight);
+            eventAggregator.GetEvent<BlurEventAggregator>().Subscribe(ChangeSigmas);
+            DetectScrollCommand = new DelegateCommand<ItemsViewScrolledEventArgs>((e) => DetectScroll(e));
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
             var artist = parameters.GetValue<string>("artist");
 
@@ -23,28 +29,41 @@ namespace SpotifyApp.ViewModels
             ArtistName = artistInfo.Artist1;
             Followers = artistInfo.Followers;
             Image = artistInfo.Image;
-            Test = 400;
             TopSongs = new ModifiedObservableCollection<ArtistTopSongsModel>(await QueryData().GetArtistTopSongs(1, artist));
             ScreenWidth = Prism.PrismApplicationBase.Current.MainPage.Width;
 
-            PanelHeight = 920;
-        }
-        void Testing(double test) => PanelHeight = test;
+            PanelHeight = 900;
 
+            Parallel.For(0, TopSongs.Count, i =>
+            {
+                TopSongs[i].GotoAlbumSongInfoPopupPageCommand = new DelegateCommand<ArtistTopSongsModel>(async (artistTopSongsModel) => await GotoAlbumSongInfoPopupPage(artistTopSongsModel));
+            });
+
+        }
+
+        #region Properties
+
+        public DelegateCommand<ItemsViewScrolledEventArgs> DetectScrollCommand { get; set; }
+
+        private float sigmax;
+        public float SigmaX
+        {
+            get { return sigmax; }
+            set { SetProperty(ref sigmax, value); }
+        }
+
+        private float sigmay;
+        public float SigmaY
+        {
+            get { return sigmay; }
+            set { SetProperty(ref sigmay, value); }
+        }
 
         private double panelHeight;
         public double PanelHeight
         {
             get { return panelHeight; }
             set { SetProperty(ref panelHeight, value); }
-        }
-        #region Properties
-
-        private double test;
-        public double Test
-        {
-            get { return test; }
-            set { SetProperty(ref test, value); }
         }
 
         private double screenWidth;
@@ -84,6 +103,40 @@ namespace SpotifyApp.ViewModels
         #endregion
 
         #region Methods
+
+        private void ChangeHeight(double height) => PanelHeight = height;
+        private void ChangeSigmas(float sigmas)
+        {
+            SigmaX = sigmas;
+            SigmaY = sigmas;
+        }
+
+        private void DetectScroll(ItemsViewScrolledEventArgs e)
+        {
+            PanelHeight = 900 - e.VerticalOffset;
+            SigmaX = (float)e.VerticalOffset * 0.1f;
+            SigmaY = (float)e.VerticalOffset * 0.1f;
+        }
+
+        private async Task GotoAlbumSongInfoPopupPage(ArtistTopSongsModel artistTopSongsModel)
+        {
+            var parameters = new NavigationParameters
+            {
+                {
+                    "songInfo",
+                    new AlbumsModel
+                    {
+                        Images = artistTopSongsModel.Image,
+                        Title = artistTopSongsModel.Title,
+                        Artist = artistTopSongsModel.Artist,
+                        Duration = artistTopSongsModel.Duration,
+                        SongId = 1,
+                    }
+                }
+            };
+
+            await navigationService.NavigateAsync("AlbumSongInfoPopupPage", parameters);
+        }
         #endregion
     }
 }
