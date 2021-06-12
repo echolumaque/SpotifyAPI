@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Prism.Commands;
 
 namespace SpotifyApp.Models
 {
@@ -15,6 +16,8 @@ namespace SpotifyApp.Models
 
         [JsonProperty("Duration")]
         public int Duration { get; set; }
+
+        public DelegateCommand<ArtistTopSongsModel> GotoAlbumSongInfoPopupPageCommand { get; set; }
     }
 
 }

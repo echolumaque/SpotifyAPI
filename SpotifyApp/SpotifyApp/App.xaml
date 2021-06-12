@@ -2,7 +2,8 @@
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:prism="http://prismlibrary.com"
-                        xmlns:converters ="clr-namespace:SpotifyApp.Helpers.Converters"       
+                        xmlns:converters ="clr-namespace:SpotifyApp.Helpers.Converters"   
+                        xmlns:renderer="clr-namespace:SpotifyApp.Helpers.Skia"
                         x:Class="SpotifyApp.App">
     <Application.Resources>
 
@@ -10,5 +11,9 @@
         <Color x:Key="SpotifyGray">#7E7E7E</Color>
 
         <converters:CommaSeperatorConverter x:Key="CommaSeperated"/>
+
+        <!--<renderer:BlurRenderer x:Key="BlurRenderer"/>-->
+        <converters:EventArgsConverter x:Key="EventArgsConverter"/>
+
     </Application.Resources>
 </prism:PrismApplication>

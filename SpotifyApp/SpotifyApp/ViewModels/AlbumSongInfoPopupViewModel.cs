@@ -27,11 +27,11 @@ namespace SpotifyApp.ViewModels
         {
             var submittedParameters = parameters.GetValue<AlbumsModel>("songInfo");
             songId = submittedParameters.SongId;
-            Image = submittedParameters.Images;
-            SongTitle = submittedParameters.Title;
-            Artist = submittedParameters.Artist;
+            Image = submittedParameters.Images;//
+            SongTitle = submittedParameters.Title;//
+            Artist = submittedParameters.Artist;//
             albumName = submittedParameters.AlbumName;
-            duration = submittedParameters.Duration;
+            duration = submittedParameters.Duration;//
             MenuContainerMargin = new Thickness(Prism.PrismApplicationBase.Current.MainPage.Width * 0.2, 0, 0, 0);
 
             await CheckIfUserLikedTheSong();
