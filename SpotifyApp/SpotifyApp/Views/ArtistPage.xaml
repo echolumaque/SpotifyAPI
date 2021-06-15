@@ -11,16 +11,12 @@
              x:Class="SpotifyApp.Views.ArtistPage">
 
     <Grid>
-        <Frame BackgroundColor="Black"
-               Padding="0"
-               HeightRequest="430"
-               VerticalOptions="Start">
-
-            <customSkia:SKBlurRenderView Source="{Binding Image}"
-                                         SigmaX="{Binding SigmaX}"
-                                         SigmaY="{Binding SigmaY}"/>
-
-        </Frame>
+        <customSkia:SKBlurRenderView Source="{Binding Image}"
+                                     SigmaX="{Binding SigmaX}"
+                                     SigmaY="{Binding SigmaY}"
+                                     BackgroundColor="Black"
+                                     HeightRequest="430"
+                                     VerticalOptions="Start"/>
 
         <StackLayout>
             <Frame HeightRequest="{Binding PanelHeight}"

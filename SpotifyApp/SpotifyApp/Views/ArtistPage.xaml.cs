@@ -5,11 +5,9 @@ namespace SpotifyApp.Views
 {
     public partial class ArtistPage : ContentPage
     {
-        private readonly IEventAggregator eventAggregator;
-        public ArtistPage(IEventAggregator eventAggregator)
+        public ArtistPage()
         {
             InitializeComponent();
-            this.eventAggregator = eventAggregator;
         }
         //private double ReMap(double oldValue, double oldMin, double oldMax, double newMin, double newMax)
         //{
