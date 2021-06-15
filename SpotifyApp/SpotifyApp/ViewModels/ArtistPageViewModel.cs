@@ -3,7 +3,9 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using SpotifyApp.Helpers;
+using SpotifyApp.Helpers.Cache;
 using SpotifyApp.Models;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SpotifyApp.ViewModels
@@ -12,15 +14,19 @@ namespace SpotifyApp.ViewModels
     {
         private INavigationService navigationService;
         private IEventAggregator eventAggregator;
-        public ArtistPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator) : base(navigationService)
+        private IImageCache imageCache;
+
+        public ArtistPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IImageCache imageCache) : base(navigationService)
         {
             this.navigationService = navigationService;
             this.eventAggregator = eventAggregator;
+            this.imageCache = imageCache;
+
             eventAggregator.GetEvent<HeightEventAggregator>().Subscribe(ChangeHeight);
             eventAggregator.GetEvent<BlurEventAggregator>().Subscribe(ChangeSigmas);
             DetectScrollCommand = new DelegateCommand<ItemsViewScrolledEventArgs>((e) => DetectScroll(e));
         }
-
+        
         public override async void Initialize(INavigationParameters parameters)
         {
             var artist = parameters.GetValue<string>("artist");
@@ -28,10 +34,8 @@ namespace SpotifyApp.ViewModels
             var artistInfo = await QueryData().GetArtistInfo(1, artist);
             ArtistName = artistInfo.Artist1;
             Followers = artistInfo.Followers;
-            Image = artistInfo.Image;
             TopSongs = new ModifiedObservableCollection<ArtistTopSongsModel>(await QueryData().GetArtistTopSongs(1, artist));
             ScreenWidth = Prism.PrismApplicationBase.Current.MainPage.Width;
-
             PanelHeight = 900;
 
             Parallel.For(0, TopSongs.Count, i =>
@@ -39,6 +43,8 @@ namespace SpotifyApp.ViewModels
                 TopSongs[i].GotoAlbumSongInfoPopupPageCommand = new DelegateCommand<ArtistTopSongsModel>(async (artistTopSongsModel) => await GotoAlbumSongInfoPopupPage(artistTopSongsModel));
             });
 
+            Image = artistInfo.Image;
+            Preferences.Set("source", artistInfo.Image);
         }
 
         #region Properties

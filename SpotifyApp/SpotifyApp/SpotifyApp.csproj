@@ -19,12 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevsDNA.XFParallax" Version="1.0.0" />
+    <PackageReference Include="MonkeyCache.FileStore" Version="1.5.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Prism.Plugin.Popups" Version="8.0.76" />
     <PackageReference Include="Refit" Version="6.0.38" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
-    <PackageReference Include="Syncfusion.Xamarin.SfParallaxView" Version="19.1.0.67" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.1" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="8.1.97" />

@@ -1,11 +1,18 @@
+using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using MonkeyCache.FileStore;
 using Prism;
 using Prism.Ioc;
 using Prism.Plugin.Popups;
+using SpotifyApp.Helpers.Cache;
+using SpotifyApp.Helpers.SQLiteHelper;
+using SpotifyApp.Models;
 using SpotifyApp.ViewModels;
 using SpotifyApp.Views;
-using Syncfusion.Licensing;
+using SQLite;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -27,7 +34,7 @@ namespace SpotifyApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            SyncfusionLicenseProvider.RegisterLicense("NDU2NzQ4QDMxMzkyZTMxMmUzMFlMZE54SzRHSDhHTUhEZWt5OUZIY3pvT2wwVC90bTI0cm5ERDFCb24zVUk9");
+            Barrel.ApplicationId = "CachedBytes";
             await NavigationService.NavigateAsync("NavigationPage/MainTabbedPage?createTab=HomePage&createTab=HomePage"/*"ArtistPage"*/);
         }
 
@@ -45,6 +52,8 @@ namespace SpotifyApp
             containerRegistry.RegisterForNavigation<PlaylistPage, PlaylistPageViewModel>();
             containerRegistry.RegisterForNavigation<NewPlaylistPagePopup, NewPlaylistPagePopupViewModel>();
             containerRegistry.RegisterForNavigation<ArtistPage, ArtistPageViewModel>();
+
+            containerRegistry.Register<IImageCache, ImageCache>();
         }
 
         //statics
@@ -54,6 +63,20 @@ namespace SpotifyApp
             {
                 return client;
             }
+        }
+
+        private static readonly Lazy<SQLiteAsyncConnection> dbConnection = new Lazy<SQLiteAsyncConnection>(() => new SQLiteAsyncConnection(SQLiteConstants.GetDatabasePath, SQLiteConstants.Flags));
+
+        public static SQLiteAsyncConnection ConnectionString = dbConnection.Value;
+        
+        public static async Task<SQLiteAsyncConnection> CreateDatabaseTable<T>()
+        {
+            if (!ConnectionString.TableMappings.Any(x => x.MappedType == typeof(T)))
+            {
+                await ConnectionString.EnableWriteAheadLoggingAsync();
+                await ConnectionString.CreateTablesAsync(CreateFlags.None, typeof(T));
+            }
+            return ConnectionString;
         }
     }
 }
